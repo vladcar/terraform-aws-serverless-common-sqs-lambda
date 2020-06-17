@@ -14,6 +14,7 @@ module "lambda" {
   maximum_retry_attempts       = 0
   environment_variables        = var.env_vars
   attach_policies              = true
+  number_of_policies           = length(concat(var.attached_policies, [aws_iam_policy.sqs_policy.arn]))
   policies                     = concat(var.attached_policies, [aws_iam_policy.sqs_policy.arn])
 
   #todo check this out
