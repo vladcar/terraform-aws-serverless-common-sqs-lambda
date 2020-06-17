@@ -13,6 +13,7 @@ module "lambda" {
   maximum_event_age_in_seconds = 120
   maximum_retry_attempts       = 0
   environment_variables        = var.env_vars
+  attach_policies              = true
   policies                     = concat(var.attached_policies, [aws_iam_policy.sqs_policy.arn])
 
   #todo check this out
