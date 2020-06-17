@@ -22,7 +22,7 @@ module "lambda" {
 
 resource "aws_lambda_event_source_mapping" "event_source" {
   event_source_arn = var.event_queue_arn
-  function_name    = module.lambda.lambda-arn
+  function_name    = module.lambda.this_lambda_function_arn
   batch_size       = 10 # 10 is default but we set it here for clarity
 }
 
