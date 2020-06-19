@@ -1,2 +1,9 @@
-# terraform-aws-serverless-common-sqs-lambda
-Lambda with sqs queue event source and required permissions
+# AWS Lambda Function with SQS queue event source
+Permissions to poll from queue included
+```
+[
+    "sqs:DeleteMessage",
+    "sqs:GetQueueAttributes",
+    "sqs:ReceiveMessage"
+]
+```
