@@ -58,7 +58,20 @@ variable "env_vars" {
 
 variable "attached_policies" {
   type        = list(string)
+  default     = []
   description = "A list of IAM policy ARNs. Will be attached to execution role"
+}
+
+variable "create_role" {
+  type        = bool
+  default     = true
+  description = "if set to 'true' creates default execution role wih policies from 'attached_policies' variable"
+}
+
+variable "execution_role" {
+  type        = string
+  default     = ""
+  description = "Execution role ARN, use if 'create_role' is set to 'true'"
 }
 
 variable "layers" {

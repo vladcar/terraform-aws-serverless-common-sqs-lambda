@@ -17,7 +17,9 @@ module "lambda" {
   layers                         = var.layers
   env_vars                       = var.env_vars
   tags                           = var.tags
-  attached_policies              = concat(var.attached_policies, [aws_iam_policy.sqs_policy.arn])
+  create_role                    = var.create_role
+  execution_role                 = var.execution_role
+  attached_policies              = var.create_role ? concat(var.attached_policies, [aws_iam_policy.sqs_policy[0].arn]) : []
 }
 
 resource "aws_lambda_event_source_mapping" "event_source" {
@@ -27,6 +29,7 @@ resource "aws_lambda_event_source_mapping" "event_source" {
 }
 
 resource "aws_iam_policy" "sqs_policy" {
+  count       = var.create_role ? 1 : 0
   name_prefix = "LambdaSqsPolicy"
   policy      = data.aws_iam_policy_document.sqs_policy_doc.json
 }
