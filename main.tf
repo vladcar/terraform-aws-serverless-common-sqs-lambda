@@ -20,6 +20,10 @@ module "lambda" {
   create_role                    = var.create_role
   execution_role                 = var.execution_role
   attached_policies              = var.create_role ? concat(var.attached_policies, [aws_iam_policy.sqs_policy[0].arn]) : []
+  enable_vpc_config              = var.enable_vpc_config
+  security_group_ids             = var.security_group_ids
+  subnet_ids                     = var.subnet_ids
+  tracing_mode                   = var.tracing_mode
 }
 
 resource "aws_lambda_event_source_mapping" "event_source" {
